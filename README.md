@@ -1,15 +1,54 @@
 # HCC Calculator
 
-A post-transplant hepatocellular carcinoma (HCC) recurrence calculator using a machine-learning algorithm mapped on pre-operative patient and tumor characteristics
+A post-transplant hepatocellular carcinoma (HCC) recurrence calculator using a machine-learning algorithm mapped on pre-operative patient and tumor characteristics. You can enter values and click on the button to get a result. Targeted users are clinicians and targeted devices are **mobile devices**.
 
-Open **index.html** to open the website. You cna enter values and click on the button to get a result. Targeted users are **clinicians** and targetted devices are **mobile** devices.
+## Requires
 
-Build instructions (if needed):
-Assuming you have Node JS installed (which includes npm)
+NodeJS (with npm)
 
-Run the following command *once* to install all required Node packages:
+## Build
+
+Run the following command *once* to install all required Node packages and build project:
+
+```
 ./install.sh
+```
 
-Thereafter run,
+Thereafter run:
+
+```
 npm run build
-everytime you make changes to the files for a new build.
+```
+
+If you want to test any changes made locally on your machine
+
+## Run
+
+Open **index.html**
+
+## Delpoyment
+
+The following are required to deploy the website
+
+* index.html
+* dist folder
+
+## Built with
+
+* [React](https://reactjs.org/) : Web Framework
+* [Babel](https://babeljs.io/) : JS compiler and JSX transpiler
+* [Webpack](https://webpack.js.org/) : Dependency management
+* [Material](https://material.io/) : Widget appearance
+* [Material-UI](https://material-ui.com/) : Material implementation library
+
+## License
+
+AGPL
+
+## Authors
+
+* SickKids
+
+## Acknowledgements
+
+* Francis Nguyen
