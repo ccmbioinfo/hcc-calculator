@@ -38,31 +38,27 @@ const variables = [{
 	weight: 0.5
 }];
 
-import { Typography, Container, Grid, DialogContentText } from '@material-ui/core';
 import React from "react";
 import ReactDOM from "react-dom";
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { Typography, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
 import Button from '@material-ui/core/Button';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
 import InfoIcon from '@material-ui/icons/Info';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-
 const useSelectStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  select: {
-    minWidth: 320
-  },
+	root: {
+		display: 'flex',
+		flexWrap: 'wrap',
+	},
+	select: {
+		minWidth: 320
+	},
 }));
 
 const useTextFieldStyles = makeStyles(theme => ({
@@ -72,32 +68,62 @@ const useTextFieldStyles = makeStyles(theme => ({
 }));
 
 const useButtonStyles = makeStyles(theme => ({
-  button: {
-    margin: theme.spacing(1),
-  },
-  input: {
-    display: 'none'
-  },
+	button: {
+		margin: theme.spacing(1),
+  	},
+  	input: {
+    	display: 'none'
+  	},
 }));
 
-const useBlackTooltipStyles = makeStyles(theme => ({
-  tooltip: {
-    color: "white",
-    backgroundColor: "black"
-  }
+const useTooltipStyles = makeStyles(theme => ({
+  	tooltip: {
+    	color: "white",
+    	backgroundColor: "black"
+  	}
 }));
+
+function EnterData(props) {
+	const [val, setVal] = React.useState('');
+	function handleChange(event) {
+		setVal(event.target.value);
+		props.updateParent(props.metadata.name, event.target.value);
+	}
+
+	if (props.metadata.display == "Input") {
+		const textfield_classes = useTextFieldStyles();
+		return (
+			<TextField
+				className={textfield_classes.textfield}
+				id={props.metadata.name}
+				type="number"
+				onChange={handleChange}
+				error={props.err}
+				margin="dense"
+				width="auto"/>);
+	} else {
+		const select_classes = useSelectStyles();
+		return (
+			<Select
+				className={select_classes.select}
+				value={val}
+				error={props.err}
+				onChange={handleChange}
+				inputProps={{
+					name: 'val',
+					id: props.metadata.name
+				}}>
+					{Array.from(Array(props.metadata.upper).keys()).map(
+						(num) => 
+						<MenuItem value={num+1} key={props.metadata.name + " Option " + num}>{num+1}</MenuItem>)}
+			</Select>
+		);
+	}
+}
 
 function Field(props) {
-		const select_classes = useSelectStyles();
-		const textfield_classes = useTextFieldStyles();
-
-		const [val, setVal] = React.useState('');
-
-		function handleChange(event) {
-			setVal(event.target.value);
-		}
-		return (
-			<Grid item>
+	return (
+		<Grid item>
 			<Grid container direction="column" spacing={0}>
 				<Grid item>
 					<Typography variant="subtitle1" gutterBottom>
@@ -105,38 +131,14 @@ function Field(props) {
 					</Typography>
 				</Grid>
 				<Grid item>
-				{
-					props.metadata.display == "Input" ? 
-					(<TextField
-						className={textfield_classes.textfield}
-        				id={props.metadata.name}
-						type="number"
-						onChange={handleChange}
-						error={props.err}
-        				margin="dense"
-        				width="auto"/>)
-					:
-					(<Select
-						className={select_classes.select}
-						value={val}
-						error={props.err}
-						onChange={handleChange}
-						inputProps={{
-							name: 'val',
-							id: props.metadata.name
-						}}>
-							{Array.from(Array(props.metadata.upper).keys()).map(
-								(num) => 
-								<MenuItem value={num+1} key={props.metadata.name + " Option " + num}>{num+1}</MenuItem>)}
-						</Select>)
-				}
+					<EnterData metadata={props.metadata} key={props.keyValue+"_EnterData"} err={props.err} updateParent={props.updateParent} />
 				</Grid>
 			</Grid>
-			</Grid>
-		);
+		</Grid>
+	);
 }
 
-function Compute_hcc_score(props) {
+function ComputeHccScore(props) {
 	const classes = useButtonStyles();
 	const [sum, setSum] = React.useState(-1);
 	const [open, setOpen] = React.useState(false);
@@ -161,34 +163,22 @@ function Compute_hcc_score(props) {
 
 		for (var i = 0; i < props.fields_info.length; i++) {
 			const field = props.fields_info[i];
-			const input = document.getElementById(field.name);
-
-			if (input !== null) {
-				const val = (field.type == "Float" ? parseFloat(input.value) : parseInt(input.value));
-				if (isNaN(val)) {
-					err_check = -2;
-					newErrorState[i] = true;
-				} else {
-					newErrorState[i] = false;
-				}
-				calc_sum += val * field.weight;
-			} else {
+			const val = (field.type == "Float" ? parseFloat(props.getValue(field.name)) : parseInt(props.getValue(field.name)));
+			if (!props.isSomeValueEntered(field.name) || isNaN(val)) {
 				err_check = -1;
-				break;
+				newErrorState[i] = true;
+			} else {
+				newErrorState[i] = false;
 			}
+			calc_sum += val * field.weight;
 		}
 
 		if (err_check == 0) {
 			setSum(calc_sum);
 			setOpen(true);
-		} else if (err_check == -1) {
-			setErrDialog({
-				show: true,
-				message: 'Please try refreshing page (getElementById failed)'
-			});
 		}
-		// Feel free to add any other error reporting via setErrDialog
-
+		// Feel free to add any error reporting via: 
+		// setErrDialog({show: true, message: "Your message here"});
 		props.setErrorState(newErrorState);
 	}
 
@@ -211,13 +201,15 @@ function Compute_hcc_score(props) {
 					<Typography variant="body1" gutterBottom>{errDialog.message}</Typography>
 				</DialogContent>
 			</Dialog>
-    	</div>);
+		</div>
+	);
 }
 
 function Info_button() {
-	const tooltip_classes = useBlackTooltipStyles();
+	const tooltip_classes = useTooltipStyles();
 	return (
 		<Tooltip 
+			enterTouchDelay={0}
 			title={config.info}
 			placement="bottom-start"
 			classes={tooltip_classes}>
@@ -229,7 +221,8 @@ class Fields extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			errorState: Array.from({length: props.fields_info.length}, (v, k) => false)
+			errorState: Array.from({length: props.fields_info.length}, (v, k) => false),
+			values: {}
 		};
 	}
 
@@ -258,16 +251,35 @@ class Fields extends React.Component {
 						<Field 
 							metadata={variable} 
 							key={"field_"+variable.name} 
-							err={this.state.errorState[idx]}/>)}
+							err={this.state.errorState[idx]}
+							keyValue={"field_"+variable.name} 
+							updateParent={(name, value) => {
+								this.setState({
+									values: {
+										...this.state.values,
+										[name]: value
+									}
+								});
+							}}
+						/>)}
 				</Grid>
 			</Grid>
 
 			<Grid item>
-				<Compute_hcc_score fields_info={this.props.fields_info}
+				<ComputeHccScore 
+					fields_info={this.props.fields_info}
 					setErrorState={(newErrorState) => {
-						this.setState({errorState: newErrorState});
+						this.setState({
+							errorState: newErrorState
+						});
 					}}
-					/>
+					isSomeValueEntered={(name) => {
+						return this.state.values.hasOwnProperty(name);
+					}}
+					getValue={(name) => {
+						return this.state.values[name];
+					}}
+				/>
 			</Grid>
 
 			</Grid>
@@ -280,6 +292,6 @@ class Fields extends React.Component {
 
 const domContainer = document.querySelector('#form');
 ReactDOM.render(
-  <Fields fields_info={variables} />,
-  domContainer
+	<Fields fields_info={variables} />,
+	domContainer
 );
