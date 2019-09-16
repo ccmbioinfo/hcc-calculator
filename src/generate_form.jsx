@@ -35,6 +35,7 @@ const variables = [{
     name: "tDiameter",
     type: "Float",
     display: "Input",
+    unit: "cm",
     weight: 0.5
 }];
 
@@ -43,6 +44,7 @@ import {
     Dialog,
     DialogContent,
     Grid,
+    InputAdornment,
     makeStyles,
     MenuItem,
     Select,
@@ -103,7 +105,11 @@ function EnterData(props) {
                 onChange={handleChange}
                 error={props.err}
                 margin="dense"
-                width="auto"/>);
+                width="auto"
+                InputProps={{
+                    endAdornment: <InputAdornment position="end">{(props.metadata.hasOwnProperty('unit') ? props.metadata.unit : "")}</InputAdornment>
+                }}
+                />);
     } else {
         const select_classes = useSelectStyles();
         return (
