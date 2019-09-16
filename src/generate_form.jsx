@@ -61,16 +61,8 @@ const useSelectStyles = makeStyles(theme => ({
         display: 'flex',
         flexWrap: 'wrap',
     },
-    select: {
-        minWidth: 320
-    },
 }));
 
-const useTextFieldStyles = makeStyles(theme => ({
-    textfield: {
-        minWidth: 320
-    }
-}));
 
 const useButtonStyles = makeStyles(theme => ({
     button: {
@@ -96,10 +88,9 @@ function EnterData(props) {
     }
 
     if (props.metadata.display == "Input") {
-        const textfield_classes = useTextFieldStyles();
         return (
             <TextField
-                className={textfield_classes.textfield}
+                fullWidth
                 id={props.metadata.name}
                 type="number"
                 onChange={handleChange}
@@ -114,7 +105,8 @@ function EnterData(props) {
         const select_classes = useSelectStyles();
         return (
             <Select
-               className={select_classes.select}
+                fullWidth
+                className={select_classes.select}
                 value={val}
                 error={props.err}
                 onChange={handleChange}
@@ -133,7 +125,7 @@ function EnterData(props) {
 function Field(props) {
     return (
         <Grid item>
-            <Grid container direction="column" spacing={0}>
+            <Grid container direction="column" spacing={0} alignItems="stretch">
                 <Grid item>
                     <Typography variant="subtitle1" gutterBottom>
                         {props.metadata.label}
@@ -143,7 +135,7 @@ function Field(props) {
                     <EnterData metadata={props.metadata} key={props.keyValue+"_EnterData"} err={props.err} updateParent={props.updateParent} />
                 </Grid>
             </Grid>
-            </Grid>
+        </Grid>
     );
 }
 
@@ -226,6 +218,17 @@ function Info_button() {
         </Tooltip>);
 }
 
+function headingSize() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth >=370) {
+        return "h3";
+    } else if (screenWidth >= 280) {
+        return "h4";
+    } else {
+        return "h5";
+    }
+}
+
 class Fields extends React.Component {
     constructor(props) {
         super(props);
@@ -240,12 +243,12 @@ class Fields extends React.Component {
             <Grid container direction="column" alignItems="center">
             <Grid item>
 
-            <Grid container direction="column" justify="space-between" alignItems="flex-start" spacing={3}>
+            <Grid container direction="column" justify="space-between" alignItems="stretch" spacing={3}>
 
               <Grid item>
                   <Grid container>
                     <Grid item xs={"auto"}>
-                        <Typography variant="h3" gutterBottom>{config.title}</Typography>
+                        <Typography variant={headingSize()} gutterBottom>{config.title}</Typography>
                     </Grid>
                     <Grid item xs>
                         <Info_button />
@@ -254,7 +257,7 @@ class Fields extends React.Component {
             </Grid>
 
             <Grid item>
-                <Grid container direction="column" alignItems="flex-start" justify="space-between" spacing={8}>            
+                <Grid container direction="column" alignItems="stretch" justify="space-between" spacing={8}>            
                     {this.props.fields_info.map(
                         (variable, idx) => 
                         <Field 
