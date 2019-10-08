@@ -1,0 +1,108 @@
+{
+  "intercept" : 1752.16465764674,
+  
+  "beta_logistic" : -512.010782385891,
+
+  "variables": [{
+    "name": "pretx_afp",
+    "label": "Pre-transplant AFP",
+    "type": "Float",
+    "unit": "ng/ml",
+    "mean": 2.7396117497182,
+    "sd": 1.71980557028156,
+    "weight": 0.451050370161917
+  }, {
+    "name": "pretx_neutro",
+    "label": "Pre-transplant neutrophil count",
+    "unit": "/mm³",
+    "type": "Float",
+    "mean": 61.2317733914835,
+    "sd": 11.6526135909109,
+    "weight": 0.39835925097382
+  }, {
+    "name": "nTACE",
+    "label": "Number of TACE treatments",
+    "type": "Integer",
+    "mean": 0.309065934065934,
+    "sd": 0.664961308443205,
+    "weight": 0.121886601456265
+  }, {
+    "name": "bridging_number",
+    "label": "Number of bridging therapies",
+    "type": "Integer",
+    "mean": 0.994505494505495,
+    "sd": 0.968540942373463,
+    "weight": 0.227356450657116
+  }, {
+    "name": "nPEI",
+    "label": "Number of PEI treatments",
+    "type": "Integer",
+    "mean": 0.0260989010989011,
+    "sd": 0.183591410163979,
+    "weight": -0.327133541108838
+  }, {
+    "name": "listing_lesion_size",
+    "label": "Lesion size at listing",
+    "type": "Float",
+    "unit": "cm",
+    "mean": 3.1092032967033,
+    "sd": 2.00543564573326,
+    "weight": 0.198299393852703
+  }, {
+    "name": "listing_diameter",
+    "label": "Diameter of largest tumour at listing",
+    "type": "Float",
+    "unit" : "cm",
+    "mean": 4.44354395604396,
+    "sd": 3.32479527590436,
+    "weight": 0.0389609738919269
+  }, {
+    "name": "pretx_lesion_number",
+    "label": "Number of lesions before transplant",
+    "type": "Integer",
+    "mean": 1.41758241758242,
+    "sd": 1.61452099822848,
+    "weight": 0.0580753819654253
+  }, {
+    "name": "pretx_milan",
+    "label": "Was the MILAN criterion met before treatment?",
+    "type": "Binary",
+    "mean": 0.784340659340659,
+    "sd": 0.411561731070924,
+    "weight": -0.0677174469249113
+  }, {
+    "name": "etiology_other",
+    "label": "Etiology",
+    "type": "List",
+    "values" : [{
+      "label" : "", "value" : 0
+    }, {
+      "label" : "HBV", "value" : "0.0"
+    }, {
+      "label" : "HCV", "value" : "0.00"
+    }, {
+      "label" : "ETOH", "value" : "0.000"
+    }, {
+      "label" : "NASH", "value" : "0.0000"
+    }, {
+      "label" : "Other", "value" : 1
+    }],
+    "mean": 0.0837912087912088,
+    "sd": 0.277264928909046,
+    "weight": -0.164227600629606
+  }],
+  "unit_scaling": 365.25,
+  
+  "sample_values" : {
+    "pretx_afp" : 7.98104976308476,
+    "nTACE" : 0,
+    "pretx_neutro" : 53.125,
+    "bridging_number" : 0,
+    "nPEI" : 0,
+    "listing_lesion_size" : 3.3,
+    "pretx_milan" : 1,
+    "listing_diameter" : 3.3,
+    "pretx_lesion_number" : 1,
+    "etiology_other" : 0
+  }
+}
