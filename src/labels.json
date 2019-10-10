@@ -1,9 +1,9 @@
 {
     "title": "HCC Calculator",
     "info": "A post-transplant hepatocellular carcinoma (HCC) recurrence calculator using a machine-learning algorithm mapped on pre-operative patient and tumor characteristics",
-    "actions_primary" : "Compute HCC score",
+    "actions_computeScore" : "Compute HCC score",
     "actions_reset"   : "Reset",
-    "actions_populate": "Sample data",
-    "result" : "HCC survival rate (years)",
+    "actions_loadExample": "Sample data",
+    "result_title" : "HCC survival rate (years)",
     "error_wrongInput" : "Invalid or missing input data"
 }

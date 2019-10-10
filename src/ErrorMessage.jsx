@@ -4,7 +4,6 @@ import {
     makeStyles,
     Typography
 } from '@material-ui/core';
-import ReactDOM from "react-dom";
 import React from "react";
 
 const useTooltipStyles = makeStyles(theme => ({

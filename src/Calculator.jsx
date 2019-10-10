@@ -22,7 +22,7 @@ export default function Calculator (props) {
     model.variables.map((v) => {initialValues[v.name] = 0 });
 
     const [values, setValues] = React.useState(initialValues);
-    const [score, setScore] = React.useState(Math.NaN);
+    const [score, setScore] = React.useState(Number.NaN);
     const [showScore, setShowScore] = React.useState(false);
     const [error, setError] = React.useState({});
     const [showError, setShowError] = React.useState(false);
@@ -75,7 +75,7 @@ export default function Calculator (props) {
             setScore(result);
             setShowScore(true);
         } else {
-            setScore(Math.NaN);
+            setScore(Number.NaN);
         }
     }
 
@@ -88,7 +88,7 @@ export default function Calculator (props) {
         <Container maxWidth="sm">
              <Header text={labels.title} info={labels.info}/>
              <Grid container direction="column" alignItems="stretch" justify="space-between" spacing={5}>
-                 {model.variables.map((variable, idx) => <Grid item key={"variable_container" + variable.name}>
+                 {model.variables.map((variable) => <Grid item key={variable.name}>
                                                                <Variable
                                                                    value={values[variable.name]}
                                                                    metadata={variable}
@@ -111,14 +111,14 @@ export default function Calculator (props) {
                  <Grid item>
                      <Grid container spacing={2}>
                          <Grid item>
-                             <Button variant="contained" color="primary" onClick={compute}>{labels.actions_primary}</Button>
+                             <Button variant="contained" color="primary" onClick={compute}>{labels.actions_submit}</Button>
                          </Grid>
                          <Grid item>
                              <Button variant="contained" color="default" onClick={reset}>{labels.actions_reset}</Button>
                          </Grid>
                          {model.sample_values && (
                              <Grid item>
-                                 <Button variant="contained" color="secondary" onClick={populateWithSampleData}>{labels.actions_populate}</Button>
+                                 <Button variant="contained" color="secondary" onClick={populateWithSampleData}>{labels.actions_loadExample}</Button>
                              </Grid>
                          )}
                      </Grid>

@@ -30,8 +30,8 @@ export default function Field (props) {
                     id: props.metadata.name
                 }}>
                     <MenuItem value = ""></MenuItem>
-                    <MenuItem value = {1} key = {props.metadata.name + "_Option_0"}>Yes</MenuItem>
-                    <MenuItem value = {0} key = {props.metadata.name + "_Option_1"}>No</MenuItem>
+                    <MenuItem value={1}>Yes</MenuItem>
+                    <MenuItem value={0}>No</MenuItem>
             </Select>
             );
 
