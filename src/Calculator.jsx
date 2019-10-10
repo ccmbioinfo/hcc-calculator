@@ -103,7 +103,7 @@ export default function Calculator (props) {
                  <Grid item>
                      <Grid container spacing={2}>
                          <Grid item>
-                             <Button variant="contained" color="primary" onClick={compute}>{labels.actions_submit}</Button>
+                             <Button variant="contained" color="primary" onClick={compute}>{labels.actions_computeScore}</Button>
                          </Grid>
                          <Grid item>
                              <Button variant="contained" color="default" onClick={reset}>{labels.actions_reset}</Button>
