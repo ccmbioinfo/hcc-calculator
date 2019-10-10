@@ -19,8 +19,8 @@ export default function Field (props) {
         case 'binary' :
             return (
             <Select
-                value={props.value}
-                variant="outlined"
+                value = {props.value}
+                variant = "outlined"
                 fullWidth
                 error = {props.error}
                 onChange = {handleChange}
@@ -34,14 +34,14 @@ export default function Field (props) {
         case 'list' :
             return (
             <Select
-                value={props.value}
-                variant="outlined"
+                value = {props.value}
+                variant = "outlined"
                 fullWidth
                 error = {props.error}
                 onChange = {handleChange}
             >
                     {props.metadata.values ? props.metadata.values.map( (entry, idx) =>
-                        <MenuItem value={entry.value} key= {props.metadata.name + "_Option_" + idx}>{entry.label}</MenuItem>
+                        <MenuItem value={entry.value} key={props.metadata.name + "_Option_" + idx}>{entry.label}</MenuItem>
                     ) : ""}
             </Select>
             );
@@ -49,8 +49,8 @@ export default function Field (props) {
         default:
             return (
             <TextField
-                value={props.value}
-                variant="outlined"
+                value = {props.value}
+                variant = "outlined"
                 fullWidth
                 type = "number"
                 onChange = {handleChange}

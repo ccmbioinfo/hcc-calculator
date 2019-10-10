@@ -84,11 +84,11 @@ export default function Calculator (props) {
              <Grid container direction="column" alignItems="stretch" justify="space-between" spacing={5}>
                  {model.variables.map((variable) => <Grid item key={variable.name}>
                                                                <Variable
-                                                                   value={values[variable.name]}
-                                                                   metadata={variable}
+                                                                   value = {values[variable.name]}
+                                                                   metadata = {variable}
                                                                    error = {errors[variable.name]}
                                                                    isValueValid = {_isValueValid}
-                                                                   updateParent={(name, value, error) => {
+                                                                   updateParent = {(name, value, error) => {
                                                                        setValues({
                                                                            ...values,
                                                                            [name]: value
