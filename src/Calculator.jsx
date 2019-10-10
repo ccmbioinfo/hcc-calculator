@@ -23,26 +23,20 @@ export default function Calculator (props) {
 
     const [values, setValues] = React.useState(initialValues);
     const [score, setScore] = React.useState(Number.NaN);
-    const [showScore, setShowScore] = React.useState(false);
-    const [error, setError] = React.useState({});
-    const [showError, setShowError] = React.useState(false);
+    const [scoreDisplayed, setScoreDisplayed] = React.useState(false);
+    const [errors, setErrors] = React.useState({});
+    const [errorDisplayed, setErrorDisplayed] = React.useState(false);
 
     function populateWithSampleData() {
         setValues(model.sample_values);
     }
 
     function handleCloseScore() {
-        setShowScore(false);
+        setScoreDisplayed(false);
     }
 
     function handleCloseError() {
-        setShowError(false);
-        for (var v in error) {
-            if (error[v]) {
-                console.log(v);
-                return;
-            }
-        }
+        setErrorDisplayed(false);
     }
 
     function _isValueValid(value) {
@@ -60,9 +54,9 @@ export default function Calculator (props) {
                 errorState[fieldMeta.name] = hasError = true;
             }
         }
-        setError(errorState);
+        setErrors(errorState);
         if (hasError) {
-            setShowError(true);
+            setErrorDisplayed(true);
             return;
         }
         return data;
@@ -73,7 +67,7 @@ export default function Calculator (props) {
         if (data) {
             var result = model.estimate(data);
             setScore(result);
-            setShowScore(true);
+            setScoreDisplayed(true);
         } else {
             setScore(Number.NaN);
         }
@@ -81,7 +75,7 @@ export default function Calculator (props) {
 
     function reset() {
         setValues(initialValues);
-        setError({});
+        setErrors({});
     }
 
     return (
@@ -93,16 +87,16 @@ export default function Calculator (props) {
                                                                    value={values[variable.name]}
                                                                    metadata={variable}
                                                                    key = {"variable_" + variable.name}
-                                                                   error = {error[variable.name]}
                                                                    keyValue = {"variable_" + variable.name}
+                                                                   error = {errors[variable.name]}
                                                                    isValueValid = {_isValueValid}
                                                                    updateParent={(name, value, error) => {
                                                                        setValues({
                                                                            ...values,
                                                                            [name]: value
                                                                        });
-                                                                       setError({
-                                                                           ...error,
+                                                                       setErrors({
+                                                                           ...errors,
                                                                            [name]: error
                                                                        });
                                                                    }}
@@ -124,8 +118,8 @@ export default function Calculator (props) {
                      </Grid>
                  </Grid>
             </Grid>
-            <ResultBox label={labels.result} value={score} open={showScore} onClose={handleCloseScore}/>
-            <ErrorMessage message={labels.error_wrongInput} open={showError} onClose={handleCloseError} />
+            <ResultBox label={labels.result} value={score} open={scoreDisplayed} onClose={handleCloseScore}/>
+            <ErrorMessage message={labels.error_wrongInput} open={errorDisplayed} onClose={handleCloseError} />
         </Container>
     );
 }
