@@ -4,7 +4,6 @@ import {
     makeStyles,
     MenuItem,
     Select,
-    Switch,
     TextField,
     Typography
 } from '@material-ui/core';
@@ -15,9 +14,6 @@ import React from "react";
 export default function Field (props) {
     function handleChange(event) {
         props.updateParent(props.metadata.name, event.target.value, !props.isValueValid(event.target.value));
-    }
-    function handleSwitch(event) {
-        props.updateParent(props.metadata.name, event.target.checked ? 1 : 0, false);
     }
     switch (props.metadata.type) {
         case 'Binary' :
