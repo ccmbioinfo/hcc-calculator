@@ -24,7 +24,7 @@ export default function Variable(props) {
             </Typography>
             </Grid>
             <Grid item>
-            <Field value={props.value} metadata={props.metadata} key={props.keyValue + "_Field"} error = {props.error} updateParent={props.updateParent} isValueValid={props.isValueValid} />
+            <Field value={props.value} metadata={props.metadata} error={props.error} updateParent={props.updateParent} isValueValid={props.isValueValid} />
             </Grid>
         </Grid>
     );

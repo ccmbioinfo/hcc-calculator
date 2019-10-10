@@ -86,8 +86,6 @@ export default function Calculator (props) {
                                                                <Variable
                                                                    value={values[variable.name]}
                                                                    metadata={variable}
-                                                                   key = {"variable_" + variable.name}
-                                                                   keyValue = {"variable_" + variable.name}
                                                                    error = {errors[variable.name]}
                                                                    isValueValid = {_isValueValid}
                                                                    updateParent={(name, value, error) => {
