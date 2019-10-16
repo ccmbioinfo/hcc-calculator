@@ -81,7 +81,7 @@ export default function Calculator (props) {
     return (
         <Container maxWidth="sm">
              <Header text={labels.title} info={labels.info}/>
-             <Grid container direction="column" alignItems="stretch" justify="space-between" spacing={5} style={{flexWrap: "nowrap"}}>
+             <Grid container direction="column" alignItems="stretch" justify="space-between" spacing={5} wrap="nowrap">
                  {model.variables.map((variable) => <Grid item key={variable.name}>
                                                                <Variable
                                                                    value = {values[variable.name]}
