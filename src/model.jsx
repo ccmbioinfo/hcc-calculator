@@ -15,7 +15,7 @@ function dot_product(a, b) {
 const model = {
     sample_values : modelData.sample_values,
 
-    variables : modelData.variables.map(v => {return {"name" : v.name, "label" : v.label, "type": v.type, "unit" : v.unit, "values" : v.values}}),
+    variables : modelData.variables,
 
     estimate : function(values) {
         var variables = modelData.variables;
