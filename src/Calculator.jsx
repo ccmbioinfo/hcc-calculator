@@ -116,7 +116,7 @@ export default function Calculator (props) {
                      </Grid>
                  </Grid>
             </Grid>
-            <ResultBox label={labels.result} value={score} open={scoreDisplayed} onClose={handleCloseScore}/>
+            <ResultBox label={labels.result_title} value={score} open={scoreDisplayed} onClose={handleCloseScore}/>
             <ErrorMessage message={labels.error_wrongInput} open={errorDisplayed} onClose={handleCloseError} />
         </Container>
     );
