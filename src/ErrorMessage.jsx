@@ -1,19 +1,31 @@
+import React from 'react';
 import {
+    Button,
     Dialog,
+    DialogActions,
     DialogContent,
-    Typography
+    DialogContentText,
+    DialogTitle
 } from '@material-ui/core';
-import React from "react";
 
 export default function ErrorMessage(props) {
-     return (<div>
-        <Dialog
-            maxWidth='xl'
-            open={props.open}
-            onClose={props.onClose}>
-            <DialogContent>
-                <Typography gutterBottom color="error">{props.message}</Typography>
-            </DialogContent>
-        </Dialog>
+    return (<div>
+      <Dialog
+        open={props.open}
+        onClose={props.onClose}
+        scroll="paper"
+      >
+        <DialogTitle>Error</DialogTitle>
+        <DialogContent dividers>
+          <DialogContentText color="error">
+            {props.message}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={props.onClose} color="default">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>);
 }
