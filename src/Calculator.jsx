@@ -1,9 +1,13 @@
 import {
     Button,
-    Container,
-    Grid
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Grid,
+    useMediaQuery,
+    useTheme
 } from '@material-ui/core';
-import ReactDOM from "react-dom";
 import React from "react";
 
 import Header from './Header';
@@ -18,6 +22,9 @@ const labels = require("./labels.json");
 document.title = labels.title + ": " + labels.info;
 
 export default function Calculator (props) {
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
     const initialValues = {};
     model.variables.map((v) => {initialValues[v.name] = 0 });
 
@@ -79,8 +86,11 @@ export default function Calculator (props) {
     }
 
     return (
-        <Container maxWidth="sm">
+        <Dialog open={true} scroll="paper" fullWidth maxWidth={'sm'} fullScreen={fullScreen} >
+          <DialogTitle disableTypography>
              <Header text={labels.title} info={labels.info}/>
+          </DialogTitle>
+          <DialogContent dividers>
              <Grid container direction="column" alignItems="stretch" justify="space-between" spacing={5} wrap="nowrap">
                  {model.variables.map((variable) => <Grid item key={variable.name}>
                                                                <Variable
@@ -100,25 +110,16 @@ export default function Calculator (props) {
                                                                    }}
                                                                 />
                                                            </Grid>)}
-                 <Grid item>
-                     <Grid container spacing={2}>
-                         <Grid item>
-                             <Button variant="contained" color="primary" onClick={compute}>{labels.actions_computeScore}</Button>
-                         </Grid>
-                         <Grid item>
-                             <Button variant="contained" color="default" onClick={reset}>{labels.actions_reset}</Button>
-                         </Grid>
-                         {model.sample_values && (
-                             <Grid item>
-                                 <Button variant="contained" color="secondary" onClick={populateWithSampleData}>{labels.actions_loadExample}</Button>
-                             </Grid>
-                         )}
-                     </Grid>
-                 </Grid>
             </Grid>
             <ResultBox label={labels.result_title} value={score} open={scoreDisplayed} onClose={handleCloseScore}/>
             <ErrorMessage message={labels.error_wrongInput} open={errorDisplayed} onClose={handleCloseError} />
-        </Container>
+          </DialogContent>
+          <DialogActions>
+            <Button variant="outlined" color="primary" onClick={compute}>{labels.actions_computeScore}</Button>
+            <Button variant="outlined" color="default" onClick={reset}>{labels.actions_reset}</Button>
+            {model.sample_values && (<Button variant="outlined" color="secondary" onClick={populateWithSampleData}>{labels.actions_loadExample}</Button>)}
+          </DialogActions>
+        </Dialog>
     );
 }
 
