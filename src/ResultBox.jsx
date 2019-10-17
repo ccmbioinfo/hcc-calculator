@@ -5,8 +5,7 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle,
-    Typography
+    DialogTitle
 } from '@material-ui/core';
 
 export default function ResultBox(props) {
@@ -19,9 +18,9 @@ export default function ResultBox(props) {
       >
         <DialogTitle>{props.label}</DialogTitle>
         <DialogContent dividers>
-            <Typography variant="h1" color="primary" style={{textAlign: "center"}}>
+            <DialogContentText variant="h1" color="primary" style={{textAlign: "center"}}>
                {parseFloat(props.value).toFixed(2)}
-            </Typography>
+            </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={props.onClose} color="primary">
