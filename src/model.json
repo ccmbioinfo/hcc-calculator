@@ -103,6 +103,6 @@
     "pretx_milan" : 1,
     "listing_diameter" : 3.3,
     "pretx_lesion_number" : 1,
-    "etiology_other" : 0
+    "etiology_other" : "0.0"
   }
 }
