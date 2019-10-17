@@ -16,7 +16,6 @@ export default function Field (props) {
     }
     switch (props.metadata.type) {
         case 'Binary' :
-        case 'binary' :
             return (
             <Select
                 value = {props.value}
@@ -31,7 +30,6 @@ export default function Field (props) {
             );
 
         case 'List' :
-        case 'list' :
             return (
             <Select
                 value = {props.value}
