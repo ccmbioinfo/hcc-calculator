@@ -46,7 +46,7 @@ export default function Calculator (props) {
         return typeof(value) !== "undefinded" && value !== '' && !isNaN(value);
     }
 
-    function _prepareValues() {
+    function _prepareValues(values, reportError) {
         var data = [];
         var hasError = false, errorState = {};
         for (var i = 0; i < model.variables.length; i++) {
@@ -58,15 +58,15 @@ export default function Calculator (props) {
             }
         }
         setErrors(errorState);
-        if (hasError) {
+        if (hasError && reportError) {
             setErrorDisplayed(true);
             return;
         }
         return data;
     }
 
-    function compute() {
-        var data = _prepareValues()
+    function compute(_values) {
+        var data = _prepareValues(_values || values, !!_values)
         if (data) {
             var result = model.estimate(data);
             setScore(result);
@@ -81,10 +81,19 @@ export default function Calculator (props) {
         setErrors({});
     }
 
+    function useSampleData() {
+        if (model.sample_values) {
+          setValues(model.sample_values);
+          setTimeout(function() {
+            compute(model.sample_values);
+          }, 500);
+        }
+    }
+
     return (
         <Dialog open={true} scroll="paper" fullWidth maxWidth={'sm'} fullScreen={fullScreen} BackdropProps={{style: { background: "transparent"}}}>
           <DialogTitle disableTypography>
-             <Header text={labels.title} info={labels.info}/>
+             <Header text={labels.title} info={labels.info} actions={[model.sample_values && <Button color="secondary" onClick={useSampleData}>{labels.actions_loadExample}</Button>]}/>
           </DialogTitle>
           <DialogContent dividers>
              <Grid container direction="column" alignItems="stretch" justify="space-between" spacing={5} wrap="nowrap">

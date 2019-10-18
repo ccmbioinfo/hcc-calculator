@@ -3,6 +3,7 @@
     "info": "Predicting post-transplant recurrence of hepatocellular carcinoma (HCC) based on pre-operative patient and tumour characteristics",
     "actions_computeScore" : "Estimate",
     "actions_reset"   : "Reset form",
+    "actions_loadExample": "Test with sample data",
     "result_title" : "Estimated post-transplant HCC recurrence (years)",
     "error_wrongInput" : "Invalid or missing input data"
 }

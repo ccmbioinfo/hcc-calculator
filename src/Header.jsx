@@ -65,6 +65,7 @@ export default function Header (props) {
                    </DialogContentText>
                  </DialogContent>
                   <DialogActions>
+                     {props.actions && props.actions.map && props.actions.map((a,i) => <div key={i} onClick={handleClose}>{a}</div>)}
                     <Button onClick={handleClose} color="default">Close</Button>
                   </DialogActions>
                 </Dialog>
