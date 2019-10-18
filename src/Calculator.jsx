@@ -23,7 +23,7 @@ document.title = labels.title + ": " + labels.info;
 
 export default function Calculator (props) {
     const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
 
     const initialValues = {};
     model.variables.map((v) => {initialValues[v.name] = 0 });
@@ -33,10 +33,6 @@ export default function Calculator (props) {
     const [scoreDisplayed, setScoreDisplayed] = React.useState(false);
     const [errors, setErrors] = React.useState({});
     const [errorDisplayed, setErrorDisplayed] = React.useState(false);
-
-    function populateWithSampleData() {
-        setValues(model.sample_values);
-    }
 
     function handleCloseScore() {
         setScoreDisplayed(false);
@@ -86,7 +82,7 @@ export default function Calculator (props) {
     }
 
     return (
-        <Dialog open={true} scroll="paper" fullWidth maxWidth={'sm'} fullScreen={fullScreen} >
+        <Dialog open={true} scroll="paper" fullWidth maxWidth={'sm'} fullScreen={fullScreen} BackdropProps={{style: { background: "transparent"}}}>
           <DialogTitle disableTypography>
              <Header text={labels.title} info={labels.info}/>
           </DialogTitle>
@@ -117,7 +113,6 @@ export default function Calculator (props) {
           <DialogActions>
             <Button variant="outlined" color="primary" onClick={compute}>{labels.actions_computeScore}</Button>
             <Button variant="outlined" color="default" onClick={reset}>{labels.actions_reset}</Button>
-            {model.sample_values && (<Button variant="outlined" color="secondary" onClick={populateWithSampleData}>{labels.actions_loadExample}</Button>)}
           </DialogActions>
         </Dialog>
     );
