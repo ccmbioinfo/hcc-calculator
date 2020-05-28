@@ -13,8 +13,8 @@
     "weight": 0.451050370161917
   }, {
     "name": "pretx_neutro",
-    "label": "Pre-transplant neutrophil count",
-    "unit": "/mm³",
+    "label": "Pre-transplant neutrophilS (% of total white blood cells)",
+    "unit": "%",
     "type": "Float",
     "mean": 61.2317733914835,
     "sd": 11.6526135909109,
