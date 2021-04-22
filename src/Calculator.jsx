@@ -48,17 +48,37 @@ export default function Calculator (props) {
 
     function _prepareValues() {
         var data = [];
-        var hasError = false, errorState = {};
+        var errorState = {};
         for (var i = 0; i < model.variables.length; i++) {
-            const fieldMeta = model.variables[i];
-            if (_isValueValid(values[fieldMeta.name])) {
-                data.push(values[fieldMeta.name]);
+
+            const name = model.variables[i].name;
+    
+            //input fields used in calcs only (e.g., pretx_lesion_number) will not have a weight
+            if (!model.variables[i].weight) {
+                continue;
+            }
+
+            let value;
+
+            if (name === "pretx_afp") {
+                value = +values["pretx_afp"] ? Math.log(+values["pretx_afp"]) : 0;
+            } else if (name === "pretx_tbs") {
+                value = Math.sqrt(
+                Math.pow(+values["pretx_lesion_number"], 2) +
+                    Math.pow(+values["pretx_lesion_size"], 2)
+                );
             } else {
-                errorState[fieldMeta.name] = hasError = true;
+                value = values[name];
+            }
+            
+            if (_isValueValid(value)) {
+                data.push({ value, ...model.variables[i] });
+            } else {
+                errorState[name] = true;
             }
         }
         setErrors(errorState);
-        if (hasError) {
+        if (Object.keys(errorState).length) {
             setErrorDisplayed(true);
             return;
         }
@@ -88,7 +108,9 @@ export default function Calculator (props) {
           </DialogTitle>
           <DialogContent dividers>
              <Grid container direction="column" alignItems="stretch" justify="space-between" spacing={5} wrap="nowrap">
-                 {model.variables.map((variable) => <Grid item key={variable.name}>
+                 {model.variables
+                                .filter((v) => !!v.label)
+                                .map((variable) => <Grid item key={variable.name}>
                                                                <Variable
                                                                    value = {values[variable.name]}
                                                                    metadata = {variable}

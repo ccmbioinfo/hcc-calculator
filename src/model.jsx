@@ -17,17 +17,16 @@ const model = {
 
     variables : modelData.variables,
 
-    estimate : function(values) {
-        var variables = modelData.variables;
-
-        var means = variables.map(v => v['mean']);
-        var stdevs = variables.map(v => v['sd']);
-        var weights = variables.map(v => v['weight']);
-
-        return (modelData.intercept +
-                modelData.beta_logistic *
-                dot_product(values.map((v,i) => (v - means[i])/stdevs[i]), weights)
-               )/ modelData.unit_scaling;
+    estimate : function(data) {
+        const days =
+            modelData.intercept +
+            modelData.beta_logistic *
+            dot_product(
+                data.map((v) => (v.value - v.mean) / v.sd),
+                data.map((v) => v.weight)
+            );
+  
+      return Math.min(Math.max(0, days), 6813) / modelData.unit_scaling;
     }
 }
 
