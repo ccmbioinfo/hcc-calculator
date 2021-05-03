@@ -1,32 +1,49 @@
-import React from 'react';
+import React from "react";
 import {
     Button,
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
-    DialogTitle
-} from '@material-ui/core';
+    DialogTitle,
+    Grid,
+    Typography,
+} from "@material-ui/core";
 
-export default function ResultBox(props) {
-    return (<div>
-      <Dialog
-        maxWidth='xl'
-        open={props.open}
-        onClose={props.onClose}
-        scroll="paper"
-      >
-        <DialogTitle>{props.label}</DialogTitle>
-        <DialogContent dividers>
-            <DialogContentText variant="h1" color="primary" style={{textAlign: "center"}}>
-               {parseFloat(props.value).toFixed(2)}
-            </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={props.onClose} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>);
+export default function ResultBox({ label, onClose, open, value }) {
+    return (
+        <div>
+            <Dialog maxWidth="xl" open={open} onClose={onClose} scroll="paper">
+                <DialogTitle>{label}</DialogTitle>
+                <DialogContent dividers>
+                    {value.length && (
+                        <Grid container wrap="nowrap" direction="row">
+                            <Grid item container direction="column">
+                                <Typography>
+                                    <strong>Time</strong>
+                                </Typography>
+                                {value.map((v, i) => (
+                                    <Typography key={i}>{v.label}</Typography>
+                                ))}
+                            </Grid>
+                            <Grid item container direction="column">
+                                <Typography>
+                                    <strong>Probability</strong>
+                                </Typography>
+                                {value.map((v, i) => (
+                                    <Typography key={i}>
+                                        {v.survival}
+                                    </Typography>
+                                ))}
+                            </Grid>
+                        </Grid>
+                    )}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={onClose} color="primary">
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
 }
