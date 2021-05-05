@@ -2,7 +2,7 @@
     "variables": [
         {
             "name": "age",
-            "label": "Patient Age",
+            "label": "Patient age at listing",
             "unit": "Years",
             "type": "Integer",
             "mean": 57.78113039095314,
@@ -19,19 +19,19 @@
                     "value": 0
                 },
                 {
-                    "label": "HBV",
+                    "label": "Hepatitis B virus",
                     "value": "0.0"
                 },
                 {
-                    "label": "HCV",
+                    "label": "Hepatitis C virus",
                     "value": "0.00"
                 },
                 {
-                    "label": "ETOH",
+                    "label": "Alcohol-related liver disease",
                     "value": "0.000"
                 },
                 {
-                    "label": "NASH",
+                    "label": "Non-alcoholic steatohepatitis",
                     "value": "0.0000"
                 },
                 {
@@ -62,6 +62,14 @@
             "weight": 0.13025025120116285
         },
         {
+            "name": "bridging_number",
+            "label": "Number of bridging therapies",
+            "type": "Integer",
+            "mean": 1.0080775444264944,
+            "sd": 0.9620921705077378,
+            "weight": 0.2197665653477352
+        },
+        {
             "name": "pretx_neutro",
             "label": "Pre-transplant neutrophils (% of total white blood cells)",
             "unit": "%",
@@ -77,14 +85,6 @@
             "mean": 137.11954765751213,
             "sd": 4.269430253602722,
             "weight": -0.042648894858128616
-        },
-        {
-            "name": "bridging_number",
-            "label": "Number of bridging therapies",
-            "type": "Integer",
-            "mean": 1.0080775444264944,
-            "sd": 0.9620921705077378,
-            "weight": 0.2197665653477352
         },
         {
             "name": "pretx_afp",
