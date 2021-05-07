@@ -45,7 +45,7 @@
         },
         {
             "name": "listing_lesion_size",
-            "label": "Maximum lesion size at listing",
+            "label": "Size largest lesion at listing",
             "type": "Float",
             "unit": "cm",
             "mean": 3.0731825525040386,
@@ -97,7 +97,7 @@
         },
         {
             "name": "pretx_lesion_size",
-            "label": "Maximum lesion size pre-transplant",
+            "label": "Size largest lesion pre-transplant",
             "unit": "cm",
             "type": "Float",
             "mean": 1.9785137318255248,
@@ -133,14 +133,9 @@
             "baseline_survival": "0.970689465530104"
         },
         {
-            "timepoint": "12 months",
+            "timepoint": "1 year",
             "days": 365.0004,
             "baseline_survival": 0.9302143455106383
-        },
-        {
-            "timepoint": "18 months",
-            "days": 547.5006,
-            "baseline_survival": 0.902782737398415
         },
         {
             "timepoint": "3 years",
