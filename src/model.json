@@ -130,12 +130,17 @@
         {
             "timepoint": "6 months",
             "days": 182.5002,
-            "baseline_survival": "0.970689465530104"
+            "baseline_survival": 0.970689465530104
         },
         {
             "timepoint": "1 year",
             "days": 365.0004,
             "baseline_survival": 0.9302143455106383
+        },
+        {
+            "timepoint": "2 years",
+            "days": 730.0008,
+            "baseline_survival": 0.8747305458828151
         },
         {
             "timepoint": "3 years",
